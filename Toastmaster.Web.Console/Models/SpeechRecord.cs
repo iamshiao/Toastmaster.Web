@@ -7,11 +7,12 @@ namespace Toastmaster.Web.Console.Models
 {
     public class SpeechRecord
     {
-        public int Id { get; set; }
+        public int Id { get; set; }        
         public string Project { get; set; }
         public int ProjectSeq { get; set; }
         public string Title { get; set; }
 
+        public int MemberId { get; set; }
         public int MeetingId { get; set; }
     }
 }

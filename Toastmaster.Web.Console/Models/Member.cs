@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Toastmaster.Web.Console.Models
 {
-    public class Toastmaster
+    public class Member
     {
         public int Id { get; set; }
         public string Name { get; set; }

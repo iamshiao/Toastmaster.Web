@@ -10,7 +10,7 @@ namespace Toastmaster.Web.Console.Models
         public int Id { get; set; }
         public string Description { get; set; }
 
-        public int ToastmasterId { get; set; }
+        public int MemberId { get; set; }
         public int MeetingId { get; set; }
         public int RoleId { get; set; }
     }
