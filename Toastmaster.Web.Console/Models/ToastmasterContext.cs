@@ -1,9 +1,10 @@
 using System;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 
 namespace Toastmaster.Web.Console.Models
-{   
+{
     public class ToastmasterContext : DbContext
     {
         // Your context has been configured to use a 'ToastmasterContext' connection string from your application's 
@@ -29,5 +30,10 @@ namespace Toastmaster.Web.Console.Models
         public virtual DbSet<RoleRecord> RoleRecords { get; set; }
         public virtual DbSet<IERecord> IERecords { get; set; }
         public virtual DbSet<ClubMember> ClubMembers { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+        }
     }
 }
