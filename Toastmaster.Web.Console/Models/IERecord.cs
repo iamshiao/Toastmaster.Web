@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace Toastmaster.Web.Console.Models
 {
-    public class IERecord
+    [Table("IERecord")]
+    public class IERecord : RoleRecord
     {
         public int SpeechRecordId { get; set; }
-        public int RoleRecordId { get; set; }
-
-        public SpeechRecord SpeechRecord { get; set; }
-        public RoleRecord RoleRecord { get; set; }
+        public virtual SpeechRecord SpeechRecord { get; set; }
     }
 }
