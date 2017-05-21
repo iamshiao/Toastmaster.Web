@@ -7,7 +7,7 @@ namespace Toastmaster.Web.Console.Models
 {
     public class SpeechRecord
     {
-        public int Id { get; set; }        
+        public int Id { get; set; }
         public string Project { get; set; }
         public int ProjectSeq { get; set; }
         public string Title { get; set; }
@@ -15,6 +15,6 @@ namespace Toastmaster.Web.Console.Models
         public int MemberId { get; set; }
         public int MeetingId { get; set; }
         public Member Member { get; set; }
-        public virtual ICollection<RoleRecord> RoleRecords { get; set; }
+        public Meeting Meeting { get; set; }
     }
 }
