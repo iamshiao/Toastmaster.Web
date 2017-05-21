@@ -16,6 +16,8 @@ namespace Toastmaster.Web.Console.Models
         public bool IsActive { get; set; }
         public bool IsGuest { get; set; }
 
-        public int ClubId { get; set; }
+        public virtual ICollection<Club> Clubs { get; set; }
+        public virtual ICollection<SpeechRecord> SpeechRecords { get; set; }
+        public virtual ICollection<RoleRecord> RoleRecords { get; set; }
     }
 }

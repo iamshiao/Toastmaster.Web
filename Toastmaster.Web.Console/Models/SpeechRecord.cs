@@ -14,5 +14,7 @@ namespace Toastmaster.Web.Console.Models
 
         public int MemberId { get; set; }
         public int MeetingId { get; set; }
+        public Member Member { get; set; }
+        public virtual ICollection<RoleRecord> RoleRecords { get; set; }
     }
 }

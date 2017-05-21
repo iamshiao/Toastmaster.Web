@@ -9,5 +9,8 @@ namespace Toastmaster.Web.Console.Models
     {
         public int SpeechRecordId { get; set; }
         public int RoleRecordId { get; set; }
+
+        public SpeechRecord SpeechRecord { get; set; }
+        public RoleRecord RoleRecord { get; set; }
     }
 }

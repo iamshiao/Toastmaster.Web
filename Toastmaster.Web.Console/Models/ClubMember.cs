@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.ComponentModel.DataAnnotations;
 
 namespace Toastmaster.Web.Console.Models
 {
-    public class Admin
+    public class ClubMember
     {
-        public int Id { get; set; }
-        public string UsrName { get; set; }
-        public string Password { get; set; }
-
         public int ClubId { get; set; }
+        public int MemberId { get; set; }
         public Club Club { get; set; }
+        public Member Member { get; set; }
     }
 }

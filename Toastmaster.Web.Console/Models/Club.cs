@@ -10,5 +10,9 @@ namespace Toastmaster.Web.Console.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Abbr { get; set; }
+
+        public virtual ICollection<Member> Members { get; set; }
+        public virtual ICollection<Meeting> Meetings { get; set; }
+        public virtual ICollection<Admin> Admins { get; set; }
     }
 }
