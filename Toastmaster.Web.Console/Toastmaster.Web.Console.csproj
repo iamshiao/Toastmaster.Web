@@ -166,6 +166,10 @@
     <Compile Include="Migrations\201705251539352_Beta.Designer.cs">
       <DependentUpon>201705251539352_Beta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705281050013_AddUniqueConstraint.cs" />
+    <Compile Include="Migrations\201705281050013_AddUniqueConstraint.Designer.cs">
+      <DependentUpon>201705281050013_AddUniqueConstraint.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Club.cs" />
@@ -233,6 +237,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201705251539352_Beta.resx">
       <DependentUpon>201705251539352_Beta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705281050013_AddUniqueConstraint.resx">
+      <DependentUpon>201705281050013_AddUniqueConstraint.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
