@@ -169,7 +169,6 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Club.cs" />
-    <Compile Include="Models\ClubMember.cs" />
     <Compile Include="Models\IERecord.cs" />
     <Compile Include="Models\Meeting.cs" />
     <Compile Include="Models\Role.cs" />
@@ -203,7 +202,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
