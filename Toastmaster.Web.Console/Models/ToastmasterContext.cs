@@ -29,7 +29,7 @@ namespace Toastmaster.Web.Console.Models
         public virtual DbSet<SpeechRecord> SpeechRecords { get; set; }
         public virtual DbSet<RoleRecord> RoleRecords { get; set; }
         public virtual DbSet<IERecord> IERecords { get; set; }
-        public virtual DbSet<ClubMember> ClubMembers { get; set; }
+        public virtual DbSet<Admin> Admins { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
