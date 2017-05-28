@@ -24,7 +24,7 @@ namespace Toastmaster.Web.Console.Models
         public string EngLastName { get; set; }
 
         [Required]
-        [MaxLength(1023)]
+        [MaxLength(255)]
         [Index(IsUnique = true)]
         public string Mail { get; set; }
 
