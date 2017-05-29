@@ -1,0 +1,50 @@
+﻿@model Toastmaster.Web.Console.Models.Meeting
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Meeting</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Club.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Club.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Seq)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Seq)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HoldDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoldDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Theme)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Theme)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
