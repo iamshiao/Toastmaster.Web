@@ -176,6 +176,10 @@
     <Compile Include="Migrations\201705281050013_AddUniqueConstraint.Designer.cs">
       <DependentUpon>201705281050013_AddUniqueConstraint.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705290501150_ConfigureLinkTable.cs" />
+    <Compile Include="Migrations\201705290501150_ConfigureLinkTable.Designer.cs">
+      <DependentUpon>201705290501150_ConfigureLinkTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Club.cs" />
@@ -276,6 +280,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705281050013_AddUniqueConstraint.resx">
       <DependentUpon>201705281050013_AddUniqueConstraint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705290501150_ConfigureLinkTable.resx">
+      <DependentUpon>201705290501150_ConfigureLinkTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
