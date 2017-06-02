@@ -27,16 +27,14 @@ namespace Toastmaster.Web.Console.Models
         [MaxLength(255)]
         [EmailAddress]
         [Index(IsUnique = true)]
-        public string Mail { get; set; }
+        public string Email { get; set; }
 
         [MaxLength(55)]
         [RegularExpression(@"^\(?([0-9]{4})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{3})$", ErrorMessage = "Entered phone format is not valid.")]
         public string PhoneNum { get; set; }
 
-        public bool IsActive { get; set; }
 
-
-        public virtual ICollection<Club> Clubs { get; set; }
+        public virtual ICollection<MemberClub> MemberClubs { get; set; }
         public virtual ICollection<SpeechRecord> SpeechRecords { get; set; }
         public virtual ICollection<RoleRecord> RoleRecords { get; set; }
     }

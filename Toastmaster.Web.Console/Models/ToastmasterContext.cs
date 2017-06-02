@@ -34,16 +34,6 @@ namespace Toastmaster.Web.Console.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-
-            modelBuilder.Entity<Member>()
-                .HasMany<Club>(c => c.Clubs)
-                .WithMany(m => m.Members)
-                .Map(mc =>
-                {
-                    mc.MapLeftKey("MemberId");
-                    mc.MapRightKey("ClubId");
-                    mc.ToTable("MemberClub");
-                });
         }
     }
 }

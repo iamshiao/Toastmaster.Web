@@ -180,11 +180,16 @@
     <Compile Include="Migrations\201705290501150_ConfigureLinkTable.Designer.cs">
       <DependentUpon>201705290501150_ConfigureLinkTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706021435500_AddMemberClubBack.cs" />
+    <Compile Include="Migrations\201706021435500_AddMemberClubBack.Designer.cs">
+      <DependentUpon>201706021435500_AddMemberClubBack.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Club.cs" />
     <Compile Include="Models\IERecord.cs" />
     <Compile Include="Models\Meeting.cs" />
+    <Compile Include="Models\MemberClub.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\RoleRecord.cs" />
     <Compile Include="Models\SpeechRecord.cs" />
@@ -331,6 +336,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705290501150_ConfigureLinkTable.resx">
       <DependentUpon>201705290501150_ConfigureLinkTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706021435500_AddMemberClubBack.resx">
+      <DependentUpon>201706021435500_AddMemberClubBack.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
