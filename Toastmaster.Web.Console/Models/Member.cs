@@ -25,10 +25,12 @@ namespace Toastmaster.Web.Console.Models
 
         [Required]
         [MaxLength(255)]
+        [EmailAddress]
         [Index(IsUnique = true)]
         public string Mail { get; set; }
 
         [MaxLength(55)]
+        [RegularExpression(@"^\(?([0-9]{4})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{3})$", ErrorMessage = "Entered phone format is not valid.")]
         public string PhoneNum { get; set; }
 
         public bool IsActive { get; set; }
