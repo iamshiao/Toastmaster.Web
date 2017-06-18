@@ -14,6 +14,11 @@ namespace Toastmaster.Web.Console.AutoMapper
         {
             CreateMap<MeetingViewModel, Meeting>()
                 .ForMember(dest => dest.ClubId, opt => opt.MapFrom(src => src.ClubCombobox.SelectedClubId));
+            CreateMap<Meeting, MeetingViewModel>()
+                .ForMember(dest => dest.ClubCombobox, opt => opt.ResolveUsing(src => new ClubComboboxViewModel()
+                {
+                    SelectedClubId = src.ClubId.ToString()
+                }));
         }
     }
 }

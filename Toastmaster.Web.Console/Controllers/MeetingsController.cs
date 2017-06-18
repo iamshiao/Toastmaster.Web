@@ -81,8 +81,11 @@ namespace Toastmaster.Web.Console.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ClubId = new SelectList(_db.Clubs, "Id", "Name", meeting.ClubId);
-            return View(meeting);
+
+            var vm = _mapper.Map<Meeting, MeetingViewModel>(meeting);
+            vm.ClubCombobox.Clubs = _mapper.Map<IEnumerable<Club>, IEnumerable<ClubViewModel>>(_db.Clubs);
+
+            return View(vm);
         }
 
         // POST: Meetings/Edit/5
@@ -90,16 +93,19 @@ namespace Toastmaster.Web.Console.Controllers
         // 詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Seq,HoldDate,Theme,ClubId")] Meeting meeting)
+        public ActionResult Edit(MeetingViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                _db.Entry(meeting).State = EntityState.Modified;
+                var updatedMeeting = _mapper.Map<Meeting>(vm);
+                _db.Entry(updatedMeeting).State = EntityState.Modified;
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ClubId = new SelectList(_db.Clubs, "Id", "Name", meeting.ClubId);
-            return View(meeting);
+
+            vm.ClubCombobox.Clubs = _mapper.Map<IEnumerable<Club>, IEnumerable<ClubViewModel>>(_db.Clubs);
+
+            return View(vm);
         }
 
         // GET: Meetings/Delete/5
