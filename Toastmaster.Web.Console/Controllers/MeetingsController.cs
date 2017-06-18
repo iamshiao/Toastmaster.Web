@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -7,17 +8,19 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Toastmaster.Web.Console.Models;
+using Toastmaster.Web.Console.Models.ViewModels;
 
 namespace Toastmaster.Web.Console.Controllers
 {
     public class MeetingsController : Controller
     {
-        private ToastmasterContext db = new ToastmasterContext();
+        private ToastmasterContext _db = new ToastmasterContext();
+        private IMapper _mapper = MvcApplication.MapperConfig.CreateMapper();
 
         // GET: Meetings
         public ActionResult Index()
         {
-            var meetings = db.Meetings.Include(m => m.Club);
+            var meetings = _db.Meetings.Include(m => m.Club);
             return View(meetings.ToList());
         }
 
@@ -28,7 +31,7 @@ namespace Toastmaster.Web.Console.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Meeting meeting = db.Meetings.Find(id);
+            Meeting meeting = _db.Meetings.Find(id);
             if (meeting == null)
             {
                 return HttpNotFound();
@@ -39,8 +42,11 @@ namespace Toastmaster.Web.Console.Controllers
         // GET: Meetings/Create
         public ActionResult Create()
         {
-            ViewBag.ClubId = new SelectList(db.Clubs, "Id", "Name");
-            return View();
+            ViewBag.ClubId = new SelectList(_db.Clubs, "Id", "Name");
+            MeetingViewModel vm = new MeetingViewModel();
+            vm.ClubCombobox = new ClubComboboxViewModel();
+            vm.ClubCombobox.Clubs = _db.Clubs;
+            return View(vm);
         }
 
         // POST: Meetings/Create
@@ -48,17 +54,19 @@ namespace Toastmaster.Web.Console.Controllers
         // 詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Seq,HoldDate,Theme,ClubId")] Meeting meeting)
+        public ActionResult Create(MeetingViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                db.Meetings.Add(meeting);
-                db.SaveChanges();
+                var meeting = _mapper.Map<MeetingViewModel, Meeting>(vm);
+                _db.Meetings.Add(meeting);
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ClubId = new SelectList(db.Clubs, "Id", "Name", meeting.ClubId);
-            return View(meeting);
+            vm.ClubCombobox.Clubs = _db.Clubs;
+
+            return View(vm);
         }
 
         // GET: Meetings/Edit/5
@@ -68,12 +76,12 @@ namespace Toastmaster.Web.Console.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Meeting meeting = db.Meetings.Find(id);
+            Meeting meeting = _db.Meetings.Find(id);
             if (meeting == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ClubId = new SelectList(db.Clubs, "Id", "Name", meeting.ClubId);
+            ViewBag.ClubId = new SelectList(_db.Clubs, "Id", "Name", meeting.ClubId);
             return View(meeting);
         }
 
@@ -86,11 +94,11 @@ namespace Toastmaster.Web.Console.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(meeting).State = EntityState.Modified;
-                db.SaveChanges();
+                _db.Entry(meeting).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ClubId = new SelectList(db.Clubs, "Id", "Name", meeting.ClubId);
+            ViewBag.ClubId = new SelectList(_db.Clubs, "Id", "Name", meeting.ClubId);
             return View(meeting);
         }
 
@@ -101,7 +109,7 @@ namespace Toastmaster.Web.Console.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Meeting meeting = db.Meetings.Find(id);
+            Meeting meeting = _db.Meetings.Find(id);
             if (meeting == null)
             {
                 return HttpNotFound();
@@ -114,9 +122,9 @@ namespace Toastmaster.Web.Console.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Meeting meeting = db.Meetings.Find(id);
-            db.Meetings.Remove(meeting);
-            db.SaveChanges();
+            Meeting meeting = _db.Meetings.Find(id);
+            _db.Meetings.Remove(meeting);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -124,7 +132,7 @@ namespace Toastmaster.Web.Console.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

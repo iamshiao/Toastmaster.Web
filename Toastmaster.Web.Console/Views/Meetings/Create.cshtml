@@ -1,4 +1,4 @@
-﻿@model Toastmaster.Web.Console.Models.Meeting
+﻿@model Toastmaster.Web.Console.Models.ViewModels.MeetingViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -6,7 +6,8 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
@@ -16,7 +17,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Seq, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Seq, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Seq, new { htmlAttributes = new { @class = "form-control", @min = "1" } })
                 @Html.ValidationMessageFor(model => model.Seq, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -32,7 +33,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Theme, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Theme, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Theme, new { htmlAttributes = new { @class = "form-control", @placeholder = "Topic of the Meeting" } })
                 @Html.ValidationMessageFor(model => model.Theme, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -40,7 +41,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ClubId, "ClubId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("ClubId", null, htmlAttributes: new { @class = "form-control custom-combobox" })
+                @Html.EditorFor(model => model.ClubCombobox, "ClubCombobox")
                 @Html.ValidationMessageFor(model => model.ClubId, "", new { @class = "text-danger" })
             </div>
         </div>
