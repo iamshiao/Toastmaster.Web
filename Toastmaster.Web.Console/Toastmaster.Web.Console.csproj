@@ -163,6 +163,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="AutoMapper\AutoMapperWebConfiguration.cs" />
+    <Compile Include="AutoMapper\ClubProfile.cs" />
     <Compile Include="AutoMapper\MeetingProfile.cs" />
     <Compile Include="Controllers\ClubsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -190,6 +191,10 @@
     <Compile Include="Migrations\201706021435500_AddMemberClubBack.Designer.cs">
       <DependentUpon>201706021435500_AddMemberClubBack.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201706180615599_AddChineseAbbrToClub.cs" />
+    <Compile Include="Migrations\201706180615599_AddChineseAbbrToClub.Designer.cs">
+      <DependentUpon>201706180615599_AddChineseAbbrToClub.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Club.cs" />
@@ -202,6 +207,7 @@
     <Compile Include="Models\Member.cs" />
     <Compile Include="Models\ToastmasterContext.cs" />
     <Compile Include="Models\ViewModels\ClubComboboxViewModel.cs" />
+    <Compile Include="Models\ViewModels\ClubViewModel.cs" />
     <Compile Include="Models\ViewModels\MeetingViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -348,6 +354,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201706021435500_AddMemberClubBack.resx">
       <DependentUpon>201706021435500_AddMemberClubBack.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706180615599_AddChineseAbbrToClub.resx">
+      <DependentUpon>201706180615599_AddChineseAbbrToClub.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

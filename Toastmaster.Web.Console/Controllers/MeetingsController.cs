@@ -45,7 +45,7 @@ namespace Toastmaster.Web.Console.Controllers
             ViewBag.ClubId = new SelectList(_db.Clubs, "Id", "Name");
             MeetingViewModel vm = new MeetingViewModel();
             vm.ClubCombobox = new ClubComboboxViewModel();
-            vm.ClubCombobox.Clubs = _db.Clubs;
+            vm.ClubCombobox.Clubs = _mapper.Map<IEnumerable<Club>, IEnumerable<ClubViewModel>>(_db.Clubs);
             return View(vm);
         }
 
@@ -64,7 +64,7 @@ namespace Toastmaster.Web.Console.Controllers
                 return RedirectToAction("Index");
             }
 
-            vm.ClubCombobox.Clubs = _db.Clubs;
+            vm.ClubCombobox.Clubs = _mapper.Map<IEnumerable<Club>, IEnumerable<ClubViewModel>>(_db.Clubs);
 
             return View(vm);
         }

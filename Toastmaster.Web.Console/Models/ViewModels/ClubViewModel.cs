@@ -5,9 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace Toastmaster.Web.Console.Models
+namespace Toastmaster.Web.Console.Models.ViewModels
 {
-    public class Club
+    public class ClubViewModel
     {
         public int Id { get; set; }
 
@@ -22,9 +22,6 @@ namespace Toastmaster.Web.Console.Models
         [MaxLength(23)]
         public string ChineseAbbr { get; set; }
 
-
-        public virtual ICollection<MemberClub> MemberClubs { get; set; }
-        public virtual ICollection<Meeting> Meetings { get; set; }
-        public virtual ICollection<Admin> Admins { get; set; }
+        public string DisplayText { get; set; }
     }
 }

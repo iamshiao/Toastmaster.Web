@@ -11,6 +11,7 @@ namespace Toastmaster.Web.Console.Models.ViewModels
         public MeetingViewModel()
         {
             HoldDate = DateTime.Now;
+            Seq = 1;
         }
 
         public int Id { get; set; }

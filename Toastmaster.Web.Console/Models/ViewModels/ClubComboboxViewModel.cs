@@ -7,7 +7,7 @@ namespace Toastmaster.Web.Console.Models.ViewModels
 {
     public class ClubComboboxViewModel
     {
-        public IEnumerable<Club> Clubs { get; set; }
+        public IEnumerable<ClubViewModel> Clubs { get; set; }
 
         public string SelectedClubId { get; set; }
     }

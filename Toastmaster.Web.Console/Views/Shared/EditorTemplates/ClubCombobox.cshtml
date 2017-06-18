@@ -2,4 +2,4 @@
 
 @model ClubComboboxViewModel
 
-@Html.DropDownListFor(vm => vm.SelectedClubId, new SelectList(@Model.Clubs, "Id", "Name"), new { @class = "form-control custom-combobox" })
+@Html.DropDownListFor(vm => vm.SelectedClubId, new SelectList(@Model.Clubs, "Id", "DisplayText"), new { @class = "form-control custom-combobox" })

@@ -13,6 +13,7 @@ namespace Toastmaster.Web.Console.AutoMapper
             return new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new MeetingProfile());
+                cfg.AddProfile(new ClubProfile());
             });
         }
     }
