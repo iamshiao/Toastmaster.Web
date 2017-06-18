@@ -27,6 +27,7 @@ namespace Toastmaster.Web.Console.Models.ViewModels
         public string Theme { get; set; }
 
         public int ClubId { get; set; }
+        public ClubViewModel Club { get; set; }
 
         public ClubComboboxViewModel ClubCombobox { get; set; }
     }

@@ -20,8 +20,9 @@ namespace Toastmaster.Web.Console.Controllers
         // GET: Meetings
         public ActionResult Index()
         {
-            var meetings = _db.Meetings.Include(m => m.Club);
-            return View(meetings.ToList());
+            var meetings = _db.Meetings.Include(m => m.Club).AsEnumerable();
+            var vm = _mapper.Map<IEnumerable<Meeting>, IEnumerable<MeetingViewModel>>(meetings);
+            return View(vm);
         }
 
         // GET: Meetings/Details/5
