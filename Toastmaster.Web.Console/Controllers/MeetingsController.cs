@@ -18,11 +18,38 @@ namespace Toastmaster.Web.Console.Controllers
         private IMapper _mapper = MvcApplication.MapperConfig.CreateMapper();
 
         // GET: Meetings
-        public ActionResult Index()
+        public ActionResult Index(string sortParam)
         {
+            ViewBag.ClubSortParam = sortParam == "Club" ? "ClubDesc" : "Club";
+            ViewBag.SeqSortParam = sortParam == "Seq" ? "SeqDesc" : "Seq";
+            ViewBag.HoldDateSortParam = sortParam == "HoldDateDesc" ? "HoldDate" : "HoldDateDesc";
+
             var meetings = _db.Meetings.Include(m => m.Club).AsEnumerable();
-            var vm = _mapper.Map<IEnumerable<Meeting>, IEnumerable<MeetingViewModel>>(meetings);
-            return View(vm);
+            var vms = _mapper.Map<IEnumerable<Meeting>, IEnumerable<MeetingViewModel>>(meetings);
+
+            switch (sortParam)
+            {
+                case "Club":
+                    vms = vms.OrderBy(vm => vm.ClubId);
+                    break;
+                case "ClubDesc":
+                    vms = vms.OrderByDescending(vm => vm.ClubId);
+                    break;
+                case "Seq":
+                    vms = vms.OrderBy(vm => vm.Seq);
+                    break;
+                case "SeqDesc":
+                    vms = vms.OrderByDescending(vm => vm.Seq);
+                    break;
+                case "HoldDate":
+                    vms = vms.OrderBy(vm => vm.HoldDate);
+                    break;
+                default:
+                    vms = vms.OrderByDescending(vm => vm.ClubId);
+                    break;
+            }
+
+            return View(vms);
         }
 
         // GET: Meetings/Details/5

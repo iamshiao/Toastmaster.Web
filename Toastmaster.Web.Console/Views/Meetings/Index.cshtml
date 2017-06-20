@@ -12,13 +12,13 @@
 <table class="table table-striped">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Club.Name)
+            @Html.ActionLink("Club", "Index", new { sortParam = ViewBag.ClubSortParam })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Seq)
+            @Html.ActionLink("Seq", "Index", new { sortParam = ViewBag.SeqSortParam })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HoldDate)
+            @Html.ActionLink("Hold Date", "Index", new { sortParam = ViewBag.HoldDateSortParam })
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Theme)
