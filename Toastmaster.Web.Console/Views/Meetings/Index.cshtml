@@ -4,12 +4,42 @@
     ViewBag.Title = "Index";
 }
 
+@section styles {
+    <style>
+        .input-group {
+            margin-bottom: 10px;
+        }
+
+        .sortedTable tr:first-child th {
+            background-color: black;
+            color: white;
+        }
+
+        .sortedTable tr > th > a {
+            color: lightblue;
+        }
+
+            .sortedTable tr > th > a:hover {
+                color: lightskyblue;
+            }
+    </style>
+}
+
 <h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table table-striped">
+@using (Html.BeginForm())
+{
+    <div class="input-group col-md-4">
+        @Html.TextBox("SearchString", null, new { @class = "form-control", @placeholder = "Search for..." })
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Search</button>
+        </span>
+    </div>
+}
+<table class="sortedTable table table-striped">
     <tr>
         <th>
             @Html.ActionLink("Club", "Index", new { sortParam = ViewBag.ClubSortParam })

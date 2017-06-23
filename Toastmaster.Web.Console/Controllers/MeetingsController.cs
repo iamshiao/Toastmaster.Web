@@ -18,7 +18,7 @@ namespace Toastmaster.Web.Console.Controllers
         private IMapper _mapper = MvcApplication.MapperConfig.CreateMapper();
 
         // GET: Meetings
-        public ActionResult Index(string sortParam)
+        public ActionResult Index(string sortParam, string searchString)
         {
             ViewBag.ClubSortParam = sortParam == "Club" ? "ClubDesc" : "Club";
             ViewBag.SeqSortParam = sortParam == "Seq" ? "SeqDesc" : "Seq";
@@ -26,6 +26,11 @@ namespace Toastmaster.Web.Console.Controllers
 
             var meetings = _db.Meetings.Include(m => m.Club).AsEnumerable();
             var vms = _mapper.Map<IEnumerable<Meeting>, IEnumerable<MeetingViewModel>>(meetings);
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                vms = vms.Where(s => s.Theme.Contains(searchString) || s.Club.DisplayText.Contains(searchString));
+            }
 
             switch (sortParam)
             {
