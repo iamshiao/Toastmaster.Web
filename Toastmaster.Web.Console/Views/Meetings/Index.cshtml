@@ -1,10 +1,12 @@
-﻿@model IEnumerable<Toastmaster.Web.Console.Models.ViewModels.MeetingViewModel>
+﻿@model PagedList.IPagedList<Toastmaster.Web.Console.Models.ViewModels.MeetingViewModel>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
 }
 
 @section styles {
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
     <style>
         .input-group {
             margin-bottom: 10px;
@@ -30,9 +32,9 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "Meetings", FormMethod.Get))
 {
-    <div class="input-group col-md-4">
+    <div class="input-group col-md-4 col-lg-3">
         @Html.TextBox("SearchString", null, new { @class = "form-control", @placeholder = "Search for..." })
         <span class="input-group-btn">
             <button class="btn btn-default" type="submit">Search</button>
@@ -42,16 +44,17 @@
 <table class="sortedTable table table-striped">
     <tr>
         <th>
-            @Html.ActionLink("Club", "Index", new { sortParam = ViewBag.ClubSortParam })
+            @Html.ActionLink("Club", "Index", new { sortParam = ViewBag.ClubSortParam, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.ActionLink("Seq", "Index", new { sortParam = ViewBag.SeqSortParam })
+            @Html.ActionLink("Seq", "Index", new { sortParam = ViewBag.SeqSortParam, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.ActionLink("Hold Date", "Index", new { sortParam = ViewBag.HoldDateSortParam })
+            @Html.ActionLink("Hold Date", "Index", new { sortParam = ViewBag.HoldDateSortParam, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Theme)
+            @*@Html.DisplayNameFor(model => model.Theme)*@
+            Theme
         </th>
         <th></th>
     </tr>
@@ -78,3 +81,8 @@
         </tr>
     }
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, currentPageNum => Url.Action("Index",
+    new { currentPageNum, sortParam = ViewBag.CurrentSortParam, currentFilter = ViewBag.CurrentFilter }))

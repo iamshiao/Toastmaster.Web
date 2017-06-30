@@ -9,27 +9,41 @@ using System.Web;
 using System.Web.Mvc;
 using Toastmaster.Web.Console.Models;
 using Toastmaster.Web.Console.Models.ViewModels;
+using PagedList;
 
 namespace Toastmaster.Web.Console.Controllers
 {
     public class MeetingsController : Controller
     {
+        private static readonly int PAGE_SIZE = 5;
+
         private ToastmasterContext _db = new ToastmasterContext();
         private IMapper _mapper = MvcApplication.MapperConfig.CreateMapper();
 
         // GET: Meetings
-        public ActionResult Index(string sortParam, string searchString)
+        public ActionResult Index(string sortParam, string currentFilter, string searchString, int? currentPageNum)
         {
+            ViewBag.CurrentSortParam = string.IsNullOrEmpty(sortParam) ? ViewBag.CurrentSortParam : sortParam;
             ViewBag.ClubSortParam = sortParam == "Club" ? "ClubDesc" : "Club";
             ViewBag.SeqSortParam = sortParam == "Seq" ? "SeqDesc" : "Seq";
-            ViewBag.HoldDateSortParam = sortParam == "HoldDateDesc" ? "HoldDate" : "HoldDateDesc";
+            ViewBag.HoldDateSortParam = sortParam == "HoldDate" ? "HoldDateDesc" : "HoldDate";
 
             var meetings = _db.Meetings.Include(m => m.Club).AsEnumerable();
             var vms = _mapper.Map<IEnumerable<Meeting>, IEnumerable<MeetingViewModel>>(meetings);
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                vms = vms.Where(s => s.Theme.Contains(searchString) || s.Club.DisplayText.Contains(searchString));
+                currentPageNum = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+
+            if(!string.IsNullOrEmpty(searchString))
+            {
+                vms = vms.Where(vm => vm.Theme.Contains(searchString));
             }
 
             switch (sortParam)
@@ -50,11 +64,11 @@ namespace Toastmaster.Web.Console.Controllers
                     vms = vms.OrderBy(vm => vm.HoldDate);
                     break;
                 default:
-                    vms = vms.OrderByDescending(vm => vm.ClubId);
+                    vms = vms.OrderByDescending(vm => vm.HoldDate);
                     break;
             }
 
-            return View(vms);
+            return View(vms.ToPagedList(currentPageNum ?? 1, PAGE_SIZE));
         }
 
         // GET: Meetings/Details/5
